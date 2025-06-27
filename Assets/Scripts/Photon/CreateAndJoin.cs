@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class CreateAndJoin : MonoBehaviourPunCallbacks
 {
+    public static CreateAndJoin instance;
+
     [SerializeField]
     TMP_InputField _inputCreate;
     [SerializeField]
@@ -20,11 +22,19 @@ public class CreateAndJoin : MonoBehaviourPunCallbacks
     [SerializeField]
     Toggle _tgOpen;
 
-
+    [SerializeField]
     int _maxPlayers;
+    [SerializeField]
     bool _isVisible;
+    [SerializeField]
     bool _isOpen;
 
+
+    private void Awake()
+    {
+        if (instance == null) 
+            instance = this;
+    }
 
     public void CreateRoom()
     {
@@ -41,6 +51,17 @@ public class CreateAndJoin : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        Debug.Log(PhotonNetwork.CountOfPlayersInRooms);
         PhotonNetwork.LoadLevel(1);
+    }
+
+    public void JoinOrCreateRoom()
+    {
+        PhotonNetwork.JoinRandomOrCreateRoom(null, 4);
+    }
+
+    public void JoindRoomList(string RoomName)
+    {
+        PhotonNetwork.JoinRoom(RoomName);
     }
 }

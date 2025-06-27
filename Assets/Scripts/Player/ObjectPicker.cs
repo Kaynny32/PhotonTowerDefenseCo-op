@@ -5,11 +5,6 @@ using UnityEngine;
 public class ObjectPicker : MonoBehaviour
 {
     [SerializeField]
-    TowerFactory _towerFactory;
-    [SerializeField]
-    InputManager _inputManager;
-
-    [SerializeField]
     float _distance = 5f;
     [SerializeField]
     public float moveSpeed = 10f;
@@ -33,7 +28,7 @@ public class ObjectPicker : MonoBehaviour
             GameObject go = hit.transform.gameObject;
             if(go.GetComponent<TowerPoint>() != null && go.GetComponent<TowerPoint>().GetIsState() != true)
             {
-                _towerFactory.CreateBase(_inputManager.GetTypeTower(), hit.point, go.GetComponent<TowerPoint>());
+                TowerFactory.instance.CreateBase(InputManager.instance.GetTypeTower(), hit.point, go.GetComponent<TowerPoint>());
             }
         }
     }

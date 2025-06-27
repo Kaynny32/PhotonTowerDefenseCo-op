@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    public static InputManager instance;
+
     [Header("Scripts Managers")]
     [SerializeField]
     UI_Manager ui_Manager;
@@ -12,6 +14,12 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     TowerType _activeType;
 
+
+    private void Awake()
+    {
+        if(instance == null)
+            instance = this;
+    }
 
     private void Start()
     {

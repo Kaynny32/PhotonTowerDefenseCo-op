@@ -26,10 +26,25 @@ public class Animation_ManagerMenu : MonoBehaviour
     RectTransform _popapSettings;
     [SerializeField]
     RectTransform _popapRoom;
+    [SerializeField]
+    RectTransform _popapListRoom;
 
 
     private void Start()
     {
+    }
+
+
+    public void ShowAndHideListRoomPopap(bool isActive = true)
+    {
+        if (isActive)
+        {
+            ShowAndHideCon(_popapListRoom, -20);
+        }
+        else
+        {
+            ShowAndHideCon(_popapListRoom, 800, false);
+        }
     }
 
     public void ShowAndHideStartPanel(bool isActive = true)

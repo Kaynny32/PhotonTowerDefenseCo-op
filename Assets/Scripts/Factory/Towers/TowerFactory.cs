@@ -5,12 +5,20 @@ using UnityEngine;
 
 public class TowerFactory : MonoBehaviour
 {
+    public static TowerFactory instance;
+
     [SerializeField]
     GameObject _prefIceTower;
     [SerializeField]
     GameObject _prefFireTower;
     [SerializeField]
     GameObject _prefBulletTower;
+
+    private void Awake()
+    {
+        if (instance == null) 
+            instance = this;
+    }
 
     public TowerBase CreateBase(TowerType towerType, Vector3 pos, TowerPoint towerPoint)
     {
