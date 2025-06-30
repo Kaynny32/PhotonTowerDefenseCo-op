@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class TowerFactory : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class TowerFactory : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null) 
+        if (instance == null)
             instance = this;
     }
 
@@ -26,18 +27,25 @@ public class TowerFactory : MonoBehaviour
         switch (towerType)
         {
             case TowerType.Fire:
-                towerObject = Instantiate(_prefFireTower, pos, Quaternion.identity);
+                towerObject = PhotonNetwork.Instantiate(Tower.FireTower.ToString(), pos, Quaternion.identity);
                 towerPoint.SetTowerGo(towerObject);
                 break;
             case TowerType.Ice:
-                towerObject = Instantiate(_prefIceTower, pos, Quaternion.identity);
+                towerObject = PhotonNetwork.Instantiate(Tower.IceTower.ToString(), pos, Quaternion.identity);
                 towerPoint.SetTowerGo(towerObject);
                 break;
             case TowerType.Bullet:
-                towerObject = Instantiate(_prefBulletTower, pos, Quaternion.identity);
+                towerObject = PhotonNetwork.Instantiate(Tower.BulletTower.ToString(), pos, Quaternion.identity);
                 towerPoint.SetTowerGo(towerObject);
                 break;
         }
         return towerObject.GetComponent<TowerBase>();
     }
+}
+
+public enum Tower
+{
+    FireTower,
+    IceTower,
+    BulletTower
 }
